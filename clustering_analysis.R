@@ -19,8 +19,8 @@ data_frame = subset(rates_data, select = -c(iso3c, iso2c, adminregion, incomeLev
 head(data_frame)
 
 # removing response variable 'year' and store in new variable
-rates.new <- data_frame[,-c(1)]
-rates.class <- data_frame[,1]
+rates.new <- data_frame[,-c(1,2)]
+rates.class <- data_frame[,1,2]
 head(rates.new)
 
 # setting seed + standardise data in explanatory vars
@@ -62,5 +62,5 @@ km.final$tot.withinss
 km.final$size
 
 rates.new.1$cluster <- km.final$cluster
-head(rates.new.1,6)
+head(rates.new.1,7)
 

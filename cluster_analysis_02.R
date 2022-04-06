@@ -20,7 +20,7 @@ summary(rates_data)
 data_frame = subset(rates_data, select = -c(iso3c, iso2c, adminregion, incomeLevel))
 head(data_frame)
 
-rates.new <- data_frame[,-c(1)]
+rates.new <- data_frame[,-c(1,2)]
 rates.class <- data_frame[,5]
 
 head(rates.new)
@@ -39,9 +39,9 @@ str(res.1)
 
 df <- data.frame(
   cluster = factor(res.1$cluster),
-  country = rates_data$country
+  gdp_per_capita = rates_data$GDP_per_capita
 )
-table(df$cluster, df$country)
+table(df$cluster, df$gdp_per_capita)
 
 # standardizing this table
 rates.new.2 <- sapply(rates.new, FUN=function(x) {scale(x, scale = T, center=F)})
@@ -50,9 +50,9 @@ head(rates.new.2)
 res.2 <- kmeans(rates.new.2,10) #111
 df <- data.frame(
   cluster = factor(res.2$cluster),
-  country = rates_data$country
+  homicides = rates_data$Intentional_homicides_per100k
 )
-table(df$cluster, df$country)
+table(df$cluster, df$homicides)
 
 res.2$centers
 
